@@ -45,12 +45,16 @@ my $selected = {};       # dictionary with a list of selected samples
 my $duplicates = {};     # dictionary with a list of duplicates
 
 # in phase 1, read the file, find duplicates and compute counts
+print "reading metadata, phase 1";
 read_metadata($meta_in, $meta_out, $counts, $selected, $duplicates, 1);
+print "phase 1 complete, starting phase 2";
 # in phase 2, sample according to counts, skip duplicates, print output metadata and add names to $selected
 read_metadata($meta_in, $meta_out, $counts, $selected, $duplicates, 2);
+print "phase 2 complete, starting fasta processing";
 
 # read fasta, print selected record to output
 read_fasta($fasta_in, $fasta_out, $selected);
+print "fasta processing complete, process done!!";
 
 ##############
 sub read_fasta {
@@ -111,10 +115,10 @@ sub read_metadata {
 	my @parts = split "\t", $line;  # split to columns
 	next if @parts==0;  # skip empty lines
 	
-        next if @parts < 24;
-        die "bad line $line (expected 24 columns)" unless @parts == 24;  # check that we have 24 columns
+        next if @parts < 22;
+        die "bad line $line (expected 22 columns)" unless @parts == 22;  # check that we have 24 columns
 	
-        my ($name, $date, $ncount, $seq_len) = @parts[0, 5, 22, 8];  # store needed columns to variables
+        my ($name, $date, $ncount, $seq_len) = @parts[0, 3, 20, 6];  # store needed columns to variables
 	
 	if($line_num == 1) {    
 	    # check header line, if selected columns have the correct names
