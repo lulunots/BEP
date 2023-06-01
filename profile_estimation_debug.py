@@ -260,6 +260,8 @@ def load_sample_variants_with_date(f):
         if rnum % 100000 == 0:
             logger.debug(f"Loaded {rnum} rows from metadata...")
         sample_name = row[sample_name_colnum]
+        print("\n")
+        print(row)
         variant = row[variant_colnum]
         date = row[date_colnum]
         result[sample_name] = (variant, date)
