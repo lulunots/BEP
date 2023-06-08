@@ -8,7 +8,7 @@
 #SBATCH --mem=90000
 #SBATCH --mail-type=END,FAIL
 
-# execute in the virpool environment with minimap2 installed additionally
+# execute in the virpool environment with minimap2 and samtools installed additionally
 
 # number of resamples as defined in the previous step
 num=100
