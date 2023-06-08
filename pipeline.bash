@@ -1,8 +1,6 @@
 # execute in the virpool environment with minimap2 installed additionally
 
 # ALIGNMENT
-# input:  /tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/read_filtering/second/
-# output: /tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/alignment/after_readfilter/
 
 # output of the alignment
 out_path="/tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/bootstrapping/abundances"
@@ -26,7 +24,7 @@ do
     samtools sort -o $out_path/sample_"${i}"/alignment_boot_sample"${i}"_"${j}".bam $out_path/sample_"${i}"/alignment_boot_sample"${i}"_"${j}".sam
     samtools index $out_path/sample_"${i}"/alignment_boot_sample"${i}"_"${j}".bam
   done
-  echo "done with sample "${i}""
+  echo "done with alignment sample "${i}""
 done
 
 for file in /tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/read_filtering/second/*
@@ -37,27 +35,22 @@ do
 done
 
 # ABUNDANCE ESTIMATION
-# input:  /tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/alignment/after_readfilter/alignment_WWB_barcode${i}.fastq.bam
-#         /tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/virpool/src/All_pango_variants.tsv -g /tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/alignment/EPI_ISL_402124.fasta
-#         /tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/virpool/src/All_pango_variants.tsv
-# output: /tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/abundance_estimation/virpool/new_all_variants/
-
-conda activate virpool
 
 # output of the abundance estimation
-loc2=""
+abundance_out="/tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/bootstrapping/abundances"
 
 # input of the variants .tsv file 
 variants="/tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/virpool/src/All_pango_variants.tsv"
 
-# input of the sample alignments IN PATH
-loc5="/tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/alignment/after_readfilter/alignment_WWB_barcode${i}.fastq.bam"
-
 for i in 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
 do
-    python3 /tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/virpool/src/virpool -o $loc2/ -v $variants -g $reference -s 0.05 /tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/alignment/after_readfilter/alignment_WWB_barcode${i}.fastq.bam
-    mv estimated_weights.yaml estimated_weights_"${i}".yaml
-    mv posterior_coverage.svg posterior_coverage"${i}".svg
-    mv significant_positions.svg significant_positions_"${i}".svg
+  mkdir $abundance_out/sample_"${i}"
+  for ((j=1;j<=num;j++))
+  do
+    python3 /tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/virpool/src/virpool -o $abundance_out/sample_"${i}" -v $variants -g $reference -s 0.05 $out_path/sample_"${i}"/alignment_boot_sample"${i}"_"${j}".bam
+    mv $abundance_out/sample_"${i}"/estimated_weights.yaml $abundance_out/sample_"${i}"/estimated_weights_"${i}"_"${j}".yaml
+    mv $abundance_out/sample_"${i}"/posterior_coverage.svg $abundance_out/sample_"${i}"/posterior_coverage"${i}"_"${j}".svg
+    mv $abundance_out/sample_"${i}"/significant_positions.svg $abundance_out/sample_"${i}"/significant_positions_"${i}_"${j}"".svg
+  done
+  echo "done with abundance estimation sample "${i}""
 done
-
