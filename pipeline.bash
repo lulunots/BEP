@@ -18,12 +18,13 @@ num=100
 
 for i in 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
 do
+  mkdir $out_path/sample_"${i}"
   for ((j=1;j<=num;j++))
   do
-    $out_path/"${num}"/sample_"${i}"/boot_sample"${i}"_"${j}".fastq
+    $out_path/sample_"${i}"/"${num}"/sample_"${i}"/boot_sample"${i}"_"${j}".fastq
     minimap2 -ax map-ont $reference $in_path/"${num}"/sample_"${i}"/boot_sample"${i}"_"${j}".fastq > $out_path/alignment_boot_sample"${i}"_"${j}".sam
-    samtools sort -o $out_path/alignment_boot_sample"${i}"_"${j}".bam $out_path/alignment_boot_sample"${i}"_"${j}".sam
-    samtools index $out_path/alignment_boot_sample"${i}"_"${j}".bam
+    samtools sort -o $out_path/sample_"${i}"/alignment_boot_sample"${i}"_"${j}".bam $out_path/sample_"${i}"/alignment_boot_sample"${i}"_"${j}".sam
+    samtools index $out_path/sample_"${i}"/alignment_boot_sample"${i}"_"${j}".bam
   done
   echo "done with sample "${i}""
 done
@@ -47,17 +48,14 @@ conda activate virpool
 loc2=""
 
 # input of the variants .tsv file 
-loc3="/tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/virpool/src/All_pango_variants.tsv"
+variants="/tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/virpool/src/All_pango_variants.tsv"
 
-# input of the reference genome .fasta file
-loc4="/tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/alignment/EPI_ISL_402124.fasta"
-
-# input of the sample alignments
+# input of the sample alignments IN PATH
 loc5="/tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/alignment/after_readfilter/alignment_WWB_barcode${i}.fastq.bam"
 
 for i in 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
 do
-    python3 /tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/virpool/src/virpool -o $loc2/ -v $loc3 -g $loc4 -s 0.05 /tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/alignment/after_readfilter/alignment_WWB_barcode${i}.fastq.bam
+    python3 /tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/virpool/src/virpool -o $loc2/ -v $variants -g $reference -s 0.05 /tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/alignment/after_readfilter/alignment_WWB_barcode${i}.fastq.bam
     mv estimated_weights.yaml estimated_weights_"${i}".yaml
     mv posterior_coverage.svg posterior_coverage"${i}".svg
     mv significant_positions.svg significant_positions_"${i}".svg
