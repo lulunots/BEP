@@ -40,7 +40,7 @@ do
   do
     # alignment
     $out_path/sample_"${i}"/"${num}"/sample_"${i}"/boot_sample"${i}"_"${j}".fastq
-    minimap2 -ax map-ont $reference $in_path/"${num}"/sample_"${i}"/boot_sample"${i}"_"${j}".fastq > $out_path/alignment_boot_sample"${i}"_"${j}".sam
+    minimap2 -ax map-ont $reference $in_path/"${num}"/sample_"${i}"/boot_sample"${i}"_"${j}".fastq > $out_path/sample_"${i}"/alignment_boot_sample"${i}"_"${j}".sam
     samtools sort -o $out_path/sample_"${i}"/alignment_boot_sample"${i}"_"${j}".bam $out_path/sample_"${i}"/alignment_boot_sample"${i}"_"${j}".sam
     samtools index $out_path/sample_"${i}"/alignment_boot_sample"${i}"_"${j}".bam
     
