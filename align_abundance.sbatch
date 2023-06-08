@@ -15,7 +15,7 @@ num=100
 
 # ALIGNMENT
 # output of the alignment
-out_path="/tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/bootstrapping/abundances"
+out_path="/tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/bootstrapping/alignment"
 
 # input of the reference genome .fasta file
 reference="/tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/alignment/EPI_ISL_402124.fasta"
@@ -30,7 +30,6 @@ abundance_out="/tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/boo
 
 # input of the variants .tsv file 
 variants="/tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/virpool/src/All_pango_variants.tsv"
-
 
 for i in 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
 do
