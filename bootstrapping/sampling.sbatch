@@ -15,12 +15,12 @@ out_path="/tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/bootstra
 
 # define amount of resamples
 num=100
-mkdir $out_path/"${num}"
+mkdir $out_path/"$num"
 
 for i in 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
 do
 # make directory to output new files  
-  mkdir $out_path/"${num}"sample_"${i}"
+  mkdir $out_path/"$num"/sample_"${i}"
   
 # count amount of reads in a sample fastq file
   var=$(wc -l $fastq_path/WWB_barcode${i}.fastq)
@@ -28,9 +28,9 @@ do
   let reads=$lines/4
   
 # make the defined amount resampled datasets per sample
-  for j in {1..$num}
+  for ((j=1;j<=num;j++))
   do
-    $path/sample --sample-with-replacement -k $reads -l 4 $fastq_path/WWB_barcode${i}.fastq > $out_path/"${num}"/sample_"${i}"/boot_sample"${i}"_"${j}".fastq
+    $sample_path/sample --sample-with-replacement -k $reads -l 4 $fastq_path/WWB_barcode${i}.fastq > $out_path/"${num}"/sample_"${i}"/boot_sample"${i}"_"${j}".fastq
   done
-  echo "done with sample "${i}"
+  echo "done with sample "${i}""
 done
