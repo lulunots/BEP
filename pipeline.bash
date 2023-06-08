@@ -1,8 +1,9 @@
+# execute in the virpool environment
+
+
 # ALIGNMENT
 # input:  /tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/read_filtering/second/
 # output: /tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/alignment/after_readfilter/
-
-conda activate bep
 
 # output of the alignment
 loc1="/tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/alignment/after_readfilter"
