@@ -10,5 +10,5 @@
 
 for i in 03 04 05 06 07 08 09 11 12 13 14 15 16 17 18 19 21 22 24
 do
-  python variance.py $i 100 /tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/bootstrapping/CDC_abundances/sample_"${i}"/estimated_weights_"${i}"_ | grep 'sample' >> variances.txt
+  python variance.py $i 100 /tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/bootstrapping/CDC_abundances/sample_"${i}"/estimated_weights_"${i}"_ | grep 'sample' >> CDC_variances.txt
 done
