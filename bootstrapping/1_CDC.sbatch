@@ -31,7 +31,7 @@ abundance_out="/tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/boo
 # input of the variants .tsv file 
 variants="/tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/virpool/src/CDC_variants.tsv"
 
-for i in 01 02
+for i in 01 02 24
 do
   mkdir $out_path/sample_"${i}"
   mkdir $abundance_out/sample_"${i}"
