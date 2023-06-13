@@ -13,5 +13,5 @@ input=/tudelft.net/staff-umbrella/SARSCoV2WastewaterBratislava/lulu/alignment/af
 
 for i in 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
 do
-  samtools mpileup -aa -A -d 0 -B -Q 0 --reference $reference $input/alignment_WWB_barcode0"${i}".fastq.bam | ivar variants -p ivar_sample_"${i}" -q 0 -r $reference
+  samtools mpileup -aa -A -d 0 -B -Q 0 --reference $reference $input/alignment_WWB_barcode"${i}".fastq.bam | ivar variants -p ivar_sample_"${i}" -q 0 -r $reference
 done
