@@ -30,4 +30,4 @@ for i in range(1,num_files+1):
     for j in range(0,int(len(buffer.split('\n'))-1)):  
         weights[j,i-1]=buffer.split()[1+j*2]
 
-print('sample ' + samplenumber + ': ' + np.array2string(weights))
+np.savetxt("weights.csv", weights, delimiter=",")
