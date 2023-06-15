@@ -11,7 +11,7 @@ import sys
 samplenumber = sys.argv[1]
 
 # number of lineages to calculate variances of
-lins = sys.argv[2]
+lins = int(sys.argv[2])
 
 # number of files to calculate the variance over
 num_files = int(sys.argv[3])
