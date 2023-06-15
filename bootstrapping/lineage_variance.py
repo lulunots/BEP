@@ -46,4 +46,4 @@ sumvar = sqvar.sum(axis=1)
 
 var = sumvar * (1/(num_files))
 
-print('sample ' + samplenumber + ': \n' + np.array2string(var))
+print('sample ' + samplenumber + ': ' + np.array2string(var))
